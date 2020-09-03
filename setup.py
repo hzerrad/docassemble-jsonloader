@@ -1,8 +1,9 @@
 import os
 from distutils.core import setup
 
+
 def readme():
-    with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as read_me:
+    with open(os.path.join(os.path.dirname(__file__), 'README.md')) as read_me:
         return read_me.read()
 
 
@@ -30,4 +31,4 @@ setup(name='docassemble-jsonloader',
       packages=['jsonloader'],
       install_requires=['orjson'],
       zip_safe=False,
-)
+      )

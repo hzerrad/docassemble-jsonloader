@@ -18,6 +18,7 @@ develop-eggs
 lib
 lib64
 .vscode
+res
 
 # Installer logs
 pip-log.txt
