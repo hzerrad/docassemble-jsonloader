@@ -1,7 +1,7 @@
 import io
 import orjson
-from src.jsondict import JsonDict
-from src.jsonlist import JsonList
+from jsonloader.jsondict import JsonDict
+from jsonloader.jsonlist import JsonList
 
 
 def is_json(string):

@@ -1,4 +1,4 @@
-from src.jsondict import JsonDict
+from jsonloader.jsondict import JsonDict
 
 class JsonList(list):
 
