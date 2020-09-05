@@ -37,7 +37,8 @@ from jsonloader import JsonLoader
   myjson.collections[0].title # or
   myjson.collections[0]['title']
   ```
-- Manipulating record information (update)
+- Manipulate record information (add, update, remove).
+- Save as new raw JSON file.
 
 ## Usage
 > Import package
@@ -64,8 +65,20 @@ for c in myjson.collections:
 # Get collections by their sectionSelector
 evidences = myjson.collections.filter('evidence')
 
+
+# Add a new record
+evidences[1].myrecord = 'My record'
+# or evidences[1]['myrecord'] = 'My record'
+
 # Update a record
-evidences[0].title = 'My Title'
+evidences[0].myrecord = 'My New Record'
+# or evidences[0]['myrecord'] = 'My New Record'
+
+# Delete a record
+del evidences[0].myrecord
+# or del evidences[0]['myrecord'] 
+
+
 ```
 ---
 

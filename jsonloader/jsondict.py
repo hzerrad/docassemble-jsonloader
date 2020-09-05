@@ -26,6 +26,12 @@ class JsonDict:
         super(JsonDict, self).__setattr__(key, value)
         self.rawjson[key] = value
 
+    def __delattr__(self, item):
+        if item in self.keys():
+            self.__delitem__(item)
+        else:
+            super(JsonDict, self).__delattr__(item)
+
     def __setitem__(self, key, value):
         self.rawjson[key] = value
         super(JsonDict, self).__setattr__(key, value)
@@ -33,6 +39,9 @@ class JsonDict:
     def __getitem__(self, key):
         return self.rawjson[key]
 
-    # TODO override __str__
+    def __delitem__(self, key):
+        del self.rawjson[key]
+        super(JsonDict, self).__delattr__(key)
+
     def __str__(self):
         return json.dumps(self.rawjson, indent=4)

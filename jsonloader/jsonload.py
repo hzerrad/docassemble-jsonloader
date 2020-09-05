@@ -1,4 +1,5 @@
 import io
+import os
 import orjson
 from jsonloader.jsondict import JsonDict
 from jsonloader.jsonlist import JsonList
@@ -37,6 +38,12 @@ class JsonLoader:
     def get_raw_json(self, to_string=True):
         dump = orjson.dumps(self.__origin)
         return dump.decode('utf-8') if to_string else dump
+
+    def dump(self, path):
+        if path[-5:] is not '.json':
+            path = path + '.json'
+        with open(path, 'w') as file:
+            file.write(self.get_raw_json())
 
     def set_attributes(self):
         forms = self.__origin['Forms']
