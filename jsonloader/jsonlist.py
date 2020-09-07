@@ -30,3 +30,16 @@ class JsonList(list):
                 filtered.append(record)
 
         return JsonList(filtered, [sectionSelector] * len(filtered))
+
+    def __str__(self):
+        string = "["
+        length = len(self)
+
+        for i in range(length):
+            string += self[i].sectionSelector
+            if i < length - 1:
+                string += ", "
+            else:
+                string += "]"
+
+        return string
