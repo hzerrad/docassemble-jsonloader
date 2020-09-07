@@ -1,5 +1,4 @@
 import io
-import os
 import orjson
 from jsonloader.jsondict import JsonDict
 from jsonloader.jsonlist import JsonList
@@ -16,36 +15,57 @@ class JsonLoader:
     __slots__ = ['__origin', 'forms', 'collections', 'contact', 'project']
 
     def __init__(self, jsonfile):
+        """
+        :param jsonfile: A json file in str or byte. Also accepts path to json
+        """
         if isinstance(jsonfile, str):
             if not is_json(jsonfile):
                 with open(jsonfile) as file:
                     self.__origin = orjson.loads(file.read())
-            else:
+            else:  # stringified json
                 self.__origin = orjson.loads(jsonfile)
 
-        elif isinstance(jsonfile, io.TextIOBase):
+        elif isinstance(jsonfile, io.TextIOBase):  # instance of File
             self.__origin = orjson.loads(jsonfile.read())
         elif isinstance(jsonfile, bytes) or isinstance(jsonfile, bytearray):
             self.__origin = orjson.loads(jsonfile)
         else:
             raise AttributeError('Invalid Json file. Accepted types are: str, filepath, byte and bytearray.')
 
+        # Initialize hierarchy
         self.forms, self.collections, self.contact, self.project = self.set_attributes()
 
     def get_raw_object(self):
+        """
+        Gets the json object as raw Python dictionary.
+        :return: dict
+        """
         return self.__origin
 
     def get_raw_json(self, to_string=True):
+        """
+        Gets the json object as byte/string
+        :param to_string: return json in UTF-8 encoded string format (bytes otherwise)
+        :return: str/byte
+        """
         dump = orjson.dumps(self.__origin)
         return dump.decode('utf-8') if to_string else dump
 
     def dump(self, path):
+        """
+        Saves the raw json to a file.
+        :param path: path to file
+        """
         if path[-5:] is not '.json':
             path = path + '.json'
         with open(path, 'w') as file:
             file.write(self.get_raw_json())
 
     def set_attributes(self):
+        """
+        Initializes the different elements/nodes of the Docassemble JSON file
+        :return: tuple of elements
+        """
         forms = self.__origin['Forms']
         collections = self.__origin['Collections']
 
@@ -66,4 +86,3 @@ class JsonLoader:
         contact = JsonDict(self.__origin['Contact'], None)
         project = JsonDict(self.__origin['Project'], None)
         return formslist, collectionslist, contact, project
-
