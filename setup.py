@@ -8,11 +8,11 @@ def readme():
 
 
 setup(name='docassemble-jsonloader',
-      version='0.0.5',
+      version='0.2.0',
       description="Python interface to the Firebase's REST API.",
       long_description=readme(),
       classifiers=[
-          'Development Status :: 3 - Alpha',
+          'Development Status :: 4 - Beta',
           'Environment :: Console',
           'Intended Audience :: Legal Industry',
           'License :: OSI Approved :: MIT License',

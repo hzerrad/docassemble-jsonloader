@@ -32,6 +32,9 @@ class JsonList(list):
         return JsonList(filtered, [sectionSelector] * len(filtered))
 
     def __str__(self):
+        if len(self) == 0:
+            return "[]"
+
         string = "["
         length = len(self)
 

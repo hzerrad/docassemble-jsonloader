@@ -35,6 +35,11 @@ class JsonLoader:
         # Initialize hierarchy
         self.set_attributes()
 
+    def get_attributes(self):
+        attr = list(self.__slots__)
+        attr.remove("__origin")
+        return attr
+
     def get_raw_object(self):
         """
         Gets the json object as raw Python dictionary.
@@ -56,7 +61,7 @@ class JsonLoader:
         Saves the raw json to a file.
         :param path: path to file
         """
-        if path[-5:] is not '.json':
+        if path[-5:] != '.json':
             path = path + '.json'
         with open(path, 'w') as file:
             file.write(self.get_raw_json())
