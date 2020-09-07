@@ -8,7 +8,7 @@ def readme():
 
 
 setup(name='docassemble-jsonloader',
-      version='0.0.1',
+      version='0.0.5',
       description="Python interface to the Firebase's REST API.",
       long_description=readme(),
       classifiers=[
